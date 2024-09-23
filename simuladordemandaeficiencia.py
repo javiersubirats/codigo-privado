@@ -90,7 +90,7 @@ if st.button("Generar Gráficos"):
     # Añadir detalles al gráfico de diferencia de IT
     plt.title('IT(p) - IT(p+1) (solo positivos) vs Precio para diferentes valores de α', fontsize=14)
     plt.xlabel('Precio (p)', fontsize=12)
-    plt.ylabel('IT(p) - IT(p+1)', fontsize=12)
+    plt.ylabel('Ingreso Marginal IT(p) - IT(p+1)', fontsize=12)
     plt.axvline(x=p0, color='gray', linestyle='--', label=f'Precio p0 = {p0}')
     plt.legend()
     plt.grid(True)
