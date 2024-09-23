@@ -23,8 +23,8 @@ def demand(p, alpha):
 def total_revenue(p, alpha):
     return p * demand(p, alpha)
 
-# Rango de precios entre 0 y la tarifa máxima
-prices_extended = np.linspace(p0, max_price, 500)  # Aseguramos una longitud adecuada
+# Rango de precios entre p0 y la tarifa máxima
+prices_extended = np.linspace(p0, max_price, 500)
 
 # Generación de gráficos
 if st.button("Generar Gráficos"):
@@ -51,10 +51,8 @@ if st.button("Generar Gráficos"):
 
         # Calcular IT(p) - IT(p+1)
         it_difference = it[:-1] - it[1:]
-        it_difference[it_difference < 0] = 0  # Filtrar negativos
-
-        # Asegurar que las longitudes sean compatibles
-        it_difference = np.append(it_difference, 0)  # Añadir un 0 para que coincida con el tamaño de `prices_extended`
+        it_difference[it_difference < 0] = 0  
+        it_difference = np.append(it_difference, 0)
 
         # Añadir resultados a la lista
         tabla_datos = {
@@ -78,7 +76,6 @@ if st.button("Generar Gráficos"):
         it = total_revenue(prices_extended, alpha)
         plt.plot(prices_extended, it, label=f'α = {alpha}')
 
-        # Encontrar el precio donde IT es máximo
         max_it_index = np.argmax(it)
         max_it_price = prices_extended[max_it_index]
         plt.axvline(x=max_it_price, linestyle='--', color='red')
@@ -96,15 +93,10 @@ if st.button("Generar Gráficos"):
     plt.subplot(3, 1, 3)
     for alpha in alpha_values:
         it = total_revenue(prices_extended, alpha)
-        
-        # Calcular IT(p) - IT(p+1)
         it_difference = it[:-1] - it[1:]
-        it_difference[it_difference < 0] = 0  # Filtrar negativos
-        
-        # Graficar solo los valores positivos de IT(p) - IT(p+1)
+        it_difference[it_difference < 0] = 0  
         plt.plot(prices_extended[:-1], it_difference, label=f'α = {alpha}')
     
-    # Añadir detalles al gráfico de diferencia de IT
     plt.title('Ingreso Marginal IT(p) - IT(p+1) (solo positivos)', fontsize=14)
     plt.xlabel('Precio (p)', fontsize=12)
     plt.ylabel('Ingreso Marginal', fontsize=12)
@@ -115,7 +107,10 @@ if st.button("Generar Gráficos"):
     plt.tight_layout()
     st.pyplot(plt)
 
-    # Mostrar tablas en Streamlit
+    # Mostrar tablas en Streamlit con formato europeo
     for i, df in enumerate(resultados):
+        # Formato europeo
+        df = df.applymap(lambda x: f"{x:,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.') if isinstance(x, (int, float)) else x)
+        
         st.write(f"Resultados para α = {alpha_values[i]}")
         st.dataframe(df)
