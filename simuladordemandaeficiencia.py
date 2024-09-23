@@ -24,7 +24,7 @@ def total_revenue(p, alpha):
     return p * demand(p, alpha)
 
 # Rango de precios entre 0 y la tarifa máxima
-prices_extended = np.linspace(0, max_price)
+prices_extended = np.linspace(0, max_price, 500)  # Aseguramos una longitud adecuada
 
 # Generación de gráficos
 if st.button("Generar Gráficos"):
@@ -39,7 +39,7 @@ if st.button("Generar Gráficos"):
         demands = demand(prices_extended, alpha)
         plt.plot(prices_extended, demands, label=f'α = {alpha}')
         
-        # Encontrar el precio donde IT es máximo
+        # Ingreso total
         it = total_revenue(prices_extended, alpha)
         max_it_index = np.argmax(it)
         max_it_price = prices_extended[max_it_index]
@@ -49,12 +49,19 @@ if st.button("Generar Gráficos"):
         plt.text(max_it_price, demands[max_it_index], f'D(p)\n{demands[max_it_index]:.1f}', 
                  horizontalalignment='left', fontsize=8, color='red')
 
+        # Calcular IT(p) - IT(p+1)
+        it_difference = it[:-1] - it[1:]
+        it_difference[it_difference < 0] = 0  # Filtrar negativos
+
+        # Asegurar que las longitudes sean compatibles
+        it_difference = np.append(it_difference, 0)  # Añadir un 0 para que coincida con el tamaño de `prices_extended`
+
         # Añadir resultados a la lista
         tabla_datos = {
             'Precio': prices_extended,
             'Demanda': demands,
             'Ingreso Total': it,
-            'IT(p) - IT(p+1)': np.append(np.zeros_like(it[:-1]), it[:-1] - it[1:])  # Cálculo de diferencia
+            'IT(p) - IT(p+1)': it_difference
         }
         resultados.append(pd.DataFrame(tabla_datos))
 
