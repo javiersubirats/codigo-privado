@@ -45,7 +45,7 @@ if st.button("Generar Gráficos"):
         plt.text(max_it_price, demands[max_it_index], f'D(p)\n{demands[max_it_index]:.1f}', 
                  horizontalalignment='left', fontsize=8, color='red')
 
-    plt.title('Demanda vs Precio para diferentes valores de α', fontsize=14)
+    plt.title('Demanda', fontsize=14)
     plt.xlabel('Precio (p)', fontsize=12)
     plt.ylabel('Demanda D(p)', fontsize=12)
     plt.axvline(x=p0, color='gray', linestyle='--', label=f'Precio p0 = {p0}')
@@ -65,7 +65,7 @@ if st.button("Generar Gráficos"):
         plt.text(max_it_price, it[max_it_index], f'Max IT\np={max_it_price:.1f}', 
                  horizontalalignment='left', fontsize=8, color='red')
 
-    plt.title('Ingreso Total (IT) vs Precio para diferentes valores de α', fontsize=14)
+    plt.title('Ingreso Total (IT)', fontsize=14)
     plt.xlabel('Precio (p)', fontsize=12)
     plt.ylabel('Ingreso Total IT(p)', fontsize=12)
     plt.axvline(x=p0, color='gray', linestyle='--', label=f'Precio p0 = {p0}')
@@ -88,9 +88,9 @@ if st.button("Generar Gráficos"):
         plt.plot(prices_extended[:-1], it_difference[:-1], label=f'α = {alpha}')  # Empezamos hasta el penúltimo índice
     
     # Añadir detalles al gráfico de diferencia de IT
-    plt.title('IT(p) - IT(p+1) (solo positivos) vs Precio para diferentes valores de α', fontsize=14)
+    plt.title('Ingreso Marginal IT(p) - IT(p+1) (solo positivos)', fontsize=14)
     plt.xlabel('Precio (p)', fontsize=12)
-    plt.ylabel('Ingreso Marginal IT(p) - IT(p+1)', fontsize=12)
+    plt.ylabel('Ingreso Marginal', fontsize=12)
     plt.axvline(x=p0, color='gray', linestyle='--', label=f'Precio p0 = {p0}')
     plt.legend()
     plt.grid(True)
