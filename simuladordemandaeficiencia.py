@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 import streamlit as st
 
 # Configuración de la página de Streamlit
@@ -29,12 +30,15 @@ prices_extended = np.linspace(0, max_price)
 if st.button("Generar Gráficos"):
     plt.figure(figsize=(12, 12))
 
-    # Gráfico de demanda
+    # Crear contenedores de resultados
+    resultados = []
+
+    # 1. Gráfico de demanda
     plt.subplot(3, 1, 1)
     for alpha in alpha_values:
         demands = demand(prices_extended, alpha)
         plt.plot(prices_extended, demands, label=f'α = {alpha}')
-
+        
         # Encontrar el precio donde IT es máximo
         it = total_revenue(prices_extended, alpha)
         max_it_index = np.argmax(it)
@@ -45,6 +49,15 @@ if st.button("Generar Gráficos"):
         plt.text(max_it_price, demands[max_it_index], f'D(p)\n{demands[max_it_index]:.1f}', 
                  horizontalalignment='left', fontsize=8, color='red')
 
+        # Añadir resultados a la lista
+        tabla_datos = {
+            'Precio': prices_extended,
+            'Demanda': demands,
+            'Ingreso Total': it,
+            'IT(p) - IT(p+1)': np.append(np.zeros_like(it[:-1]), it[:-1] - it[1:])  # Cálculo de diferencia
+        }
+        resultados.append(pd.DataFrame(tabla_datos))
+
     plt.title('Demanda', fontsize=14)
     plt.xlabel('Precio (p)', fontsize=12)
     plt.ylabel('Demanda D(p)', fontsize=12)
@@ -52,7 +65,7 @@ if st.button("Generar Gráficos"):
     plt.legend()
     plt.grid(True)
 
-    # Gráfico de ingreso total
+    # 2. Gráfico de ingreso total
     plt.subplot(3, 1, 2)
     for alpha in alpha_values:
         it = total_revenue(prices_extended, alpha)
@@ -72,20 +85,17 @@ if st.button("Generar Gráficos"):
     plt.legend()
     plt.grid(True)
 
-    # Gráfico de IT(p) - IT(p+1)
+    # 3. Gráfico de IT(p) - IT(p+1)
     plt.subplot(3, 1, 3)
     for alpha in alpha_values:
         it = total_revenue(prices_extended, alpha)
         
         # Calcular IT(p) - IT(p+1)
-        it_difference = np.zeros_like(it)
-        it_difference[:-1] = it[:-1] - it[1:]  # Diferencia de IT
-        
-        # Filtrar los valores negativos, reemplazándolos por 0 (opcional)
-        it_difference[it_difference < 0] = 0
+        it_difference = it[:-1] - it[1:]
+        it_difference[it_difference < 0] = 0  # Filtrar negativos
         
         # Graficar solo los valores positivos de IT(p) - IT(p+1)
-        plt.plot(prices_extended[:-1], it_difference[:-1], label=f'α = {alpha}')  # Empezamos hasta el penúltimo índice
+        plt.plot(prices_extended[:-1], it_difference, label=f'α = {alpha}')
     
     # Añadir detalles al gráfico de diferencia de IT
     plt.title('Ingreso Marginal IT(p) - IT(p+1) (solo positivos)', fontsize=14)
@@ -96,8 +106,9 @@ if st.button("Generar Gráficos"):
     plt.grid(True)
     
     plt.tight_layout()
-    plt.show()
-
-    
-    # Mostrar gráfico en Streamlit
     st.pyplot(plt)
+
+    # Mostrar tablas en Streamlit
+    for i, df in enumerate(resultados):
+        st.write(f"Resultados para α = {alpha_values[i]}")
+        st.dataframe(df)
