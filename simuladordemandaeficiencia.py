@@ -76,20 +76,28 @@ if st.button("Generar Gráficos"):
     plt.subplot(3, 1, 3)
     for alpha in alpha_values:
         it = total_revenue(prices_extended, alpha)
-
+        
         # Calcular IT(p) - IT(p+1)
         it_difference = np.zeros_like(it)
         it_difference[:-1] = it[:-1] - it[1:]  # Diferencia de IT
+        
+        # Filtrar los valores negativos, reemplazándolos por 0 (opcional)
+        it_difference[it_difference < 0] = 0
+        
+        # Graficar solo los valores positivos de IT(p) - IT(p+1)
         plt.plot(prices_extended[:-1], it_difference[:-1], label=f'α = {alpha}')  # Empezamos hasta el penúltimo índice
-
-    plt.title('IT(p) - IT(p+1) vs Precio para diferentes valores de α', fontsize=14)
+    
+    # Añadir detalles al gráfico de diferencia de IT
+    plt.title('IT(p) - IT(p+1) (solo positivos) vs Precio para diferentes valores de α', fontsize=14)
     plt.xlabel('Precio (p)', fontsize=12)
     plt.ylabel('IT(p) - IT(p+1)', fontsize=12)
     plt.axvline(x=p0, color='gray', linestyle='--', label=f'Precio p0 = {p0}')
     plt.legend()
     plt.grid(True)
-
+    
     plt.tight_layout()
+    plt.show()
+
     
     # Mostrar gráfico en Streamlit
     st.pyplot(plt)
