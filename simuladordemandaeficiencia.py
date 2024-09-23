@@ -24,7 +24,7 @@ def total_revenue(p, alpha):
     return p * demand(p, alpha)
 
 # Rango de precios entre 0 y la tarifa máxima
-prices_extended = np.linspace(0, max_price, 500)  # Aseguramos una longitud adecuada
+prices_extended = np.linspace(p0, max_price, 500)  # Aseguramos una longitud adecuada
 
 # Generación de gráficos
 if st.button("Generar Gráficos"):
