@@ -4,7 +4,7 @@ import pandas as pd
 import streamlit as st
 
 # Configuración de la página de Streamlit
-st.title("Modelo de Demanda e Ingreso Total")
+st.markdown('<h1 style="color:#0072ce;">Modelo de Demanda e Ingreso Total</h1>', unsafe_allow_html=True)
 st.markdown("**DGI-UX by Best Practices**")  # Añadir aquí el texto
 # st.sidebar.markdown("**Dir.GIA by Best Practices**")  # Ahora en la barra lateral
 
