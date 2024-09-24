@@ -82,19 +82,23 @@ if st.button("Generar Gráficos"):
     plt.subplot(3, 1, 3)
     for alpha in alpha_values:
         it = total_revenue(prices_extended, alpha)
-        it_difference = it[:-1] - it[1:]
+        it_difference = it[:-1] - it[1:]  # Diferencia entre IT(p) y IT(p+1)
+        
+        # Eliminar valores negativos
         it_difference[it_difference < 0] = 0  
+    
         plt.plot(prices_extended[:-1], it_difference, label=f'α = {alpha}, p0 = {p0}')  # Añadir p0 en la leyenda
-
-        # Calcular el índice del máximo ingreso total para dibujar la línea roja
-        max_it_index = np.argmax(it)
+        
+        # Encontrar el índice del máximo ingreso marginal
+        max_it_index = np.argmax(it_difference)
         max_it_price = prices_extended[max_it_index]
         
-        # Añadir línea roja en el gráfico de ingreso marginal
-        plt.axvline(x=max_it_price, linestyle='--', color='red')
-        plt.text(max_it_price, it[max_it_index], f'Max IT\np={max_it_price:.1f}', 
-                 horizontalalignment='left', fontsize=8, color='red')
-
+        # Verificación antes de usar plt.text
+        if 0 <= max_it_index < len(it_difference) and np.isfinite(max_it_price) and np.isfinite(it_difference[max_it_index]):
+            plt.axvline(x=max_it_price, linestyle='--', color='red')
+            plt.text(max_it_price, it_difference[max_it_index], f'Max IT\np={max_it_price:.1f}', 
+                     horizontalalignment='left', fontsize=8, color='red')
+    
     plt.title('Ingreso Marginal IT(p) - IT(p+1) (solo positivos)', fontsize=14)
     plt.xlabel('Precio (p)', fontsize=12)
     plt.ylabel('Ingreso Marginal', fontsize=12)
