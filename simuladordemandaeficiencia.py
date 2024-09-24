@@ -89,14 +89,20 @@ if st.button("Generar Gráficos"):
     
         plt.plot(prices_extended[:-1], it_difference, label=f'α = {alpha}, p0 = {p0}')  # Añadir p0 en la leyenda
         
-        # Encontrar el índice del máximo ingreso marginal
-        max_it_index = np.argmax(it_difference)
-        max_it_price = prices_extended[max_it_index]
+        # Encontrar el índice donde el ingreso marginal cruza el eje X
+        zero_crossing_indices = np.where(np.diff(np.sign(it_difference)))[0]
         
-        # Verificación antes de usar plt.text
-        if 0 <= max_it_index < len(it_difference) and np.isfinite(max_it_price) and np.isfinite(it_difference[max_it_index]):
-            plt.axvline(x=max_it_price, linestyle='--', color='red')
-            plt.text(max_it_price, it_difference[max_it_index], f'Max IT\np={max_it_price:.1f}', 
+        if len(zero_crossing_indices) > 0:
+            zero_crossing_index = zero_crossing_indices[0]  # Toma el primer cruce
+            zero_crossing_price = prices_extended[zero_crossing_index]  # Precio correspondiente
+    
+            # Dibujar línea roja en el cruce con el eje X
+            plt.axvline(x=zero_crossing_price, linestyle='--', color='red')
+    
+            # Valor del ingreso total en ese punto
+            revenue_at_zero_crossing = total_revenue(zero_crossing_price, alpha)
+    
+            plt.text(zero_crossing_price, 0, f'Max IT\np={zero_crossing_price:.1f}\nIT={revenue_at_zero_crossing:.1f}', 
                      horizontalalignment='left', fontsize=8, color='red')
     
     plt.title('Ingreso Marginal IT(p) - IT(p+1) (solo positivos)', fontsize=14)
