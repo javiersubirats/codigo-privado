@@ -27,6 +27,9 @@ def total_revenue(p, alpha):
 # Rango de precios entre p0 y la tarifa máxima
 prices_extended = np.linspace(p0*0.8, max_price, 500)
 
+# Inicializa la lista de resultados
+resultados = []
+
 # Generación de gráficos
 if st.button("Generar Gráficos"):
     plt.figure(figsize=(12, 12))
@@ -94,9 +97,12 @@ if st.button("Generar Gráficos"):
     st.pyplot(plt)
 
     # Mostrar tablas en Streamlit con formato europeo
-    for i, df in enumerate(resultados):
-        # Formato europeo
+    for alpha in alpha_values:
+        df = pd.DataFrame({
+            'Precio': prices_extended,
+            'Demanda': demand(prices_extended, alpha),
+            'Ingreso Total': total_revenue(prices_extended, alpha)
+        })
         df = df.applymap(lambda x: f"{x:,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.') if isinstance(x, (int, float)) else x)
-        
-        st.write(f"Resultados para α = {alpha_values[i]}")
+        st.write(f"Resultados para α = {alpha}")
         st.dataframe(df)
