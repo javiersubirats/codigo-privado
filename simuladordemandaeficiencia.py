@@ -55,8 +55,6 @@ if st.button("Generar Gráficos"):
     plt.xlabel('Precio (p)', fontsize=12)
     plt.ylabel('Demanda D(p)', fontsize=12)
     plt.axvline(x=p0, color='gray', linestyle='--', label=f'Precio p0 = {p0}')
-    plt.text(max_it_price, demands[max_it_index], f'D(p)\n{demands[max_it_index]:.1f}', 
-                 horizontalalignment='left', fontsize=8, color='grey')
     plt.legend()
     plt.grid(True)
     
@@ -77,6 +75,8 @@ if st.button("Generar Gráficos"):
     plt.xlabel('Precio (p)', fontsize=12)
     plt.ylabel('Ingreso Total IT(p)', fontsize=12)
     plt.axvline(x=p0, color='gray', linestyle='--', label=f'Precio p0 = {p0}')
+    plt.text(p0, demands[max_it_index], f'D(p)\n{demands[max_it_index]:.1f}', 
+                 horizontalalignment='left', fontsize=8, color='grey')
     plt.legend()
     plt.grid(True)
     
