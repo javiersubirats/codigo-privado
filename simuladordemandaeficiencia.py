@@ -5,7 +5,7 @@ import streamlit as st
 
 # Configuración de la página de Streamlit
 st.title("Modelo de Demanda e Ingreso Total")
-st.markdown("**Dir.GIA by Best Practices**")  # Añadir aquí el texto
+st.markdown("**DGI-UX by Best Practices**")  # Añadir aquí el texto
 # st.sidebar.markdown("**Dir.GIA by Best Practices**")  # Ahora en la barra lateral
 
 # Entradas del usuario
