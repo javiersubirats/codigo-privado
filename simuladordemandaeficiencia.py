@@ -68,7 +68,7 @@ if st.button("Generar Gráficos"):
         max_it_index = np.argmax(it)
         max_it_price = prices_extended[max_it_index]
         plt.axvline(x=max_it_price, linestyle='--', color='red')
-        plt.text(max_it_price, it[max_it_index], f'Max IT\np={max_it_price:.1f}', 
+        plt.text(max_it_price, it[max_it_index], f'Max IT\np={it[max_it_index]:.1f}', 
                  horizontalalignment='left', fontsize=8, color='red')
     
     plt.title('Ingreso Total (IT)', fontsize=14)
