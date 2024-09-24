@@ -31,9 +31,6 @@ prices_extended = np.linspace(p0*0.8, max_price, 500)
 if st.button("Generar Gráficos"):
     plt.figure(figsize=(12, 12))
 
-    # Crear contenedores de resultados
-    resultados = []
-
     # 1. Gráfico de demanda
     plt.subplot(3, 1, 1)
     for alpha in alpha_values:
@@ -93,7 +90,6 @@ if st.button("Generar Gráficos"):
     plt.legend()
     plt.grid(True)
 
-    
     plt.tight_layout()
     st.pyplot(plt)
 
