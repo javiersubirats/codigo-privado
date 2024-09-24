@@ -24,12 +24,8 @@ def demand(p, alpha):
 def total_revenue(p, alpha):
     return p * demand(p, alpha)
 
-# Rango de precios entre p0 y la tarifa máxima, redondeado a enteros
+# Rango de precios entre p0 y la tarifa máxima
 prices_extended = np.linspace(p0*0.8, max_price, 500)
-prices_extended = np.round(prices_extended).astype(int)  # Redondea y convierte a enteros
-
-# Elimina valores duplicados (por si el redondeo crea duplicados)
-prices_extended = np.unique(prices_extended)
 
 # Generación de gráficos
 if st.button("Generar Gráficos"):
