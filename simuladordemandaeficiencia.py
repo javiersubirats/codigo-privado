@@ -68,15 +68,14 @@ if st.button("Generar Gráficos"):
         max_it_index = np.argmax(it)
         max_it_price = prices_extended[max_it_index]
         plt.axvline(x=max_it_price, linestyle='--', color='red')
-        plt.text(max_it_price, it[max_it_index], f'Max IT\np={it[max_it_index]:.1f}', 
+        plt.text(max_it_price, it[max_it_index], f'Max IT\n={it[max_it_index]:.1f}', 
                  horizontalalignment='left', fontsize=8, color='red')
     
     plt.title('Ingreso Total (IT)', fontsize=14)
     plt.xlabel('Precio (p)', fontsize=12)
     plt.ylabel('Ingreso Total IT(p)', fontsize=12)
     plt.axvline(x=p0, color='gray', linestyle='--', label=f'Precio p0 = {p0}')
-    plt.text(p0, demands[max_it_index], f'D(p)\n{demands[max_it_index]:.1f}', 
-                 horizontalalignment='left', fontsize=8, color='grey')
+
     plt.legend()
     plt.grid(True)
     
@@ -104,7 +103,7 @@ if st.button("Generar Gráficos"):
             # Valor del ingreso total en ese punto
             revenue_at_zero_crossing = total_revenue(zero_crossing_price, alpha)
     
-            plt.text(zero_crossing_price, 0, f'Max IT\np={zero_crossing_price:.1f}\nIT={revenue_at_zero_crossing:.1f}', 
+            plt.text(zero_crossing_price, 0, f'Max IT\np={zero_crossing_price:.1f}\n, 
                      horizontalalignment='left', fontsize=8, color='red')
     
     plt.title('Ingreso Marginal IT(p) - IT(p+1) (solo positivos)', fontsize=14)
