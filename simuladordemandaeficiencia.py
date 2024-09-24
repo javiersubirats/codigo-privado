@@ -61,8 +61,9 @@ if st.button("Generar Gráficos"):
     # 2. Gráfico de ingreso total
     plt.subplot(3, 1, 2)
     for alpha in alpha_values:
+        it_p0 = total_revenue(p0, alpha)
         it = total_revenue(prices_extended, alpha)
-        plt.plot(prices_extended, it, label=f'α = {alpha}, p0 = {p0}')  # Añadir p0 en la leyenda
+        plt.plot(prices_extended, it, label=f'α = {alpha}, it = {it_p0}')  # Añadir p0 en la leyenda
     
         max_it_index = np.argmax(it)
         max_it_price = prices_extended[max_it_index]
