@@ -37,8 +37,9 @@ if st.button("Generar Gráficos"):
     # 1. Gráfico de demanda
     plt.subplot(3, 1, 1)
     for alpha in alpha_values:
+        d_p0 = demand(p0, alpha)
         demands = demand(prices_extended, alpha)
-        plt.plot(prices_extended, demands, label=f'α = {alpha}, p0 = {p0}')  # Añadir p0 en la leyenda
+        plt.plot(prices_extended, demands, label=f'α = {alpha}, D = {d_p0}')  # Añadir p0 en la leyenda
         
         # Ingreso total
         it = total_revenue(prices_extended, alpha)
