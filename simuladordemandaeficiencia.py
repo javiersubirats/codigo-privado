@@ -92,6 +92,8 @@ if st.button("Generar Gráficos"):
         
         # Añadir línea roja en el gráfico de ingreso marginal
         plt.axvline(x=max_it_price, linestyle='--', color='red')
+        plt.text(max_it_price, it[max_it_index], f'Max IT\np={max_it_price:.1f}', 
+                 horizontalalignment='left', fontsize=8, color='red')
 
     plt.title('Ingreso Marginal IT(p) - IT(p+1) (solo positivos)', fontsize=14)
     plt.xlabel('Precio (p)', fontsize=12)
