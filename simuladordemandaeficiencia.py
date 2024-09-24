@@ -63,7 +63,7 @@ if st.button("Generar Gráficos"):
     for alpha in alpha_values:
         it_p0 = total_revenue(p0, alpha)
         it = total_revenue(prices_extended, alpha)
-        plt.plot(prices_extended, it, label=f'α = {alpha}, it = {it_p0}')  # Añadir p0 en la leyenda
+        plt.plot(prices_extended, it, label=f'α = {alpha}, IT = {it_p0}')  # Añadir p0 en la leyenda
     
         max_it_index = np.argmax(it)
         max_it_price = prices_extended[max_it_index]
@@ -88,7 +88,7 @@ if st.button("Generar Gráficos"):
         # Eliminar valores negativos
         it_difference[it_difference < 0] = 0  
     
-        plt.plot(prices_extended[:-1], it_difference, label=f'α = {alpha}, p0 = {p0}')  # Añadir p0 en la leyenda
+        plt.plot(prices_extended[:-1], it_difference, label=f'α = {alpha}, p0 = {zero_crossing_price}')  # Añadir p0 en la leyenda
         
         # Encontrar el índice donde el ingreso marginal cruza el eje X
         zero_crossing_indices = np.where(np.diff(np.sign(it_difference)))[0]
