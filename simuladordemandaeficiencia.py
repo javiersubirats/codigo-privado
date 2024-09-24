@@ -5,18 +5,16 @@ import streamlit as st
 
 # Configuración de la página de Streamlit
 st.markdown('<h1 style="color:#0072ce;">Modelo de Demanda e Ingreso Total</h1>', unsafe_allow_html=True)
-#st.markdown('<h2 style="color:#71c5e8;">DGI-UX by Best Practices</h2>', unsafe_allow_html=True)
 st.markdown('<p style="color:#71c5e8;"><strong>DGI-UX by Best Practices</strong></p>', unsafe_allow_html=True)
-# st.sidebar.markdown("**Dir.GIA by Best Practices**")  # Ahora en la barra lateral
 
 # Entradas del usuario
-lambda_value = st.number_input("Demanda máxima (λ)", min_value=1, value=18)
+lambda_value = st.number_input("Demanda máxima (λ)", min_value=0.1, value=18.0, step=0.1)  # Acepta decimales
 p0 = st.number_input("Precio de referencia (p0)", min_value=1, value=100)
 max_price = st.number_input("Tarifa máxima", min_value=1, value=1600)
 
-# Entrada de valores de alpha como una lista de enteros
+# Entrada de valores de alpha como una lista de decimales
 alpha_values_input = st.text_input("Valores de α (separados por comas)", "30, 130, 230")
-alpha_values = [int(alpha.strip()) for alpha in alpha_values_input.split(',')]
+alpha_values = [float(alpha.strip()) for alpha in alpha_values_input.split(',')]  # Convierte a float
 
 # Función de demanda con diferentes valores de alpha
 def demand(p, alpha):
