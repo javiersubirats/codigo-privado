@@ -6,7 +6,7 @@ import streamlit as st
 # Configuración de la página de Streamlit
 st.markdown('<h1 style="color:#0072ce;">Modelo de Demanda e Ingreso Total</h1>', unsafe_allow_html=True)
 #st.markdown('<h2 style="color:#71c5e8;">DGI-UX by Best Practices</h2>', unsafe_allow_html=True)
-st.markdown("**DGI-UX by Best Practices**")  # Añadir aquí el texto
+st.markdown('<p style="color:#71c5e8;"><strong>DGI-UX by Best Practices</strong></p>', unsafe_allow_html=True)
 # st.sidebar.markdown("**Dir.GIA by Best Practices**")  # Ahora en la barra lateral
 
 # Entradas del usuario
