@@ -38,72 +38,59 @@ if st.button("Generar Gráficos"):
     plt.subplot(3, 1, 1)
     for alpha in alpha_values:
         demands = demand(prices_extended, alpha)
-        plt.plot(prices_extended, demands, label=f'α = {alpha}')
+        plt.plot(prices_extended, demands, label=f'α = {alpha}, p0 = {p0}')  # Añadir p0 en la leyenda
         
         # Ingreso total
         it = total_revenue(prices_extended, alpha)
         max_it_index = np.argmax(it)
         max_it_price = prices_extended[max_it_index]
-
+    
         # Dibujar línea vertical en el precio donde IT es máximo
         plt.axvline(x=max_it_price, linestyle='--', color='red')
         plt.text(max_it_price, demands[max_it_index], f'D(p)\n{demands[max_it_index]:.1f}', 
                  horizontalalignment='left', fontsize=8, color='red')
-
-        # Calcular IT(p) - IT(p+1)
-        it_difference = it[:-1] - it[1:]
-        it_difference[it_difference < 0] = 0  
-        it_difference = np.append(it_difference, 0)
-
-        # Añadir resultados a la lista
-        tabla_datos = {
-            'Precio': prices_extended,
-            'Demanda': demands,
-            'Ingreso Total': it,
-            'IT(p) - IT(p+1)': it_difference
-        }
-        resultados.append(pd.DataFrame(tabla_datos))
-
+    
     plt.title('Demanda', fontsize=14)
     plt.xlabel('Precio (p)', fontsize=12)
     plt.ylabel('Demanda D(p)', fontsize=12)
     plt.axvline(x=p0, color='gray', linestyle='--', label=f'Precio p0 = {p0}')
     plt.legend()
     plt.grid(True)
-
+    
     # 2. Gráfico de ingreso total
     plt.subplot(3, 1, 2)
     for alpha in alpha_values:
         it = total_revenue(prices_extended, alpha)
-        plt.plot(prices_extended, it, label=f'α = {alpha}')
-
+        plt.plot(prices_extended, it, label=f'α = {alpha}, p0 = {p0}')  # Añadir p0 en la leyenda
+    
         max_it_index = np.argmax(it)
         max_it_price = prices_extended[max_it_index]
         plt.axvline(x=max_it_price, linestyle='--', color='red')
         plt.text(max_it_price, it[max_it_index], f'Max IT\np={max_it_price:.1f}', 
                  horizontalalignment='left', fontsize=8, color='red')
-
+    
     plt.title('Ingreso Total (IT)', fontsize=14)
     plt.xlabel('Precio (p)', fontsize=12)
     plt.ylabel('Ingreso Total IT(p)', fontsize=12)
     plt.axvline(x=p0, color='gray', linestyle='--', label=f'Precio p0 = {p0}')
     plt.legend()
     plt.grid(True)
-
+    
     # 3. Gráfico de IT(p) - IT(p+1)
     plt.subplot(3, 1, 3)
     for alpha in alpha_values:
         it = total_revenue(prices_extended, alpha)
         it_difference = it[:-1] - it[1:]
         it_difference[it_difference < 0] = 0  
-        plt.plot(prices_extended[:-1], it_difference, label=f'α = {alpha}')
-    
+        plt.plot(prices_extended[:-1], it_difference, label=f'α = {alpha}, p0 = {p0}')  # Añadir p0 en la leyenda
+        
     plt.title('Ingreso Marginal IT(p) - IT(p+1) (solo positivos)', fontsize=14)
     plt.xlabel('Precio (p)', fontsize=12)
     plt.ylabel('Ingreso Marginal', fontsize=12)
     plt.axvline(x=p0, color='gray', linestyle='--', label=f'Precio p0 = {p0}')
     plt.legend()
     plt.grid(True)
+
     
     plt.tight_layout()
     st.pyplot(plt)
