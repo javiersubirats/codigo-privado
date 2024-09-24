@@ -88,11 +88,11 @@ if st.button("Generar Gráficos"):
         # Eliminar valores negativos
         it_difference[it_difference < 0] = 0  
     
-        plt.plot(prices_extended[:-1], it_difference, label=f'α = {alpha}, p0 = {p0}')  # Añadir p0 en la leyenda
+        
         
         # Encontrar el índice donde el ingreso marginal cruza el eje X
         zero_crossing_indices = np.where(np.diff(np.sign(it_difference)))[0]
-        
+        plt.plot(prices_extended[:-1], it_difference, label=f'α = {alpha}, p0 = {prices_extended[zero_crossing_index]}')  # Añadir p0 en la leyenda
         if len(zero_crossing_indices) > 0:
             zero_crossing_index = zero_crossing_indices[0]  # Toma el primer cruce
             zero_crossing_price = prices_extended[zero_crossing_index]  # Precio correspondiente
