@@ -103,12 +103,12 @@ if st.button("Generar Gráficos"):
             # Valor del ingreso total en ese punto
             revenue_at_zero_crossing = total_revenue(zero_crossing_price, alpha)
     
-            plt.text(zero_crossing_price, 0, f'Max IT\np={zero_crossing_price:.1f}', 
+            plt.text(zero_crossing_price, 0, f'Max IM\nim={zero_crossing_price:.1f}', 
                      horizontalalignment='left', fontsize=8, color='red')
     
     plt.title('Ingreso Marginal IT(p) - IT(p+1) (solo positivos)', fontsize=14)
     plt.xlabel('Precio (p)', fontsize=12)
-    plt.ylabel('Ingreso Marginal', fontsize=12)
+    plt.ylabel('Ingreso Marginal IM(p)', fontsize=12)
     plt.axvline(x=p0, color='gray', linestyle='--', label=f'Precio p0 = {p0}')
     plt.legend()
     plt.grid(True)
