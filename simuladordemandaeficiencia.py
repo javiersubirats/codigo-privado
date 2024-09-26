@@ -92,34 +92,38 @@ if st.button("Generar Gráficos"):
         
         # Eliminar valores negativos
         it_difference[it_difference < 0] = 0  
-    
-        
         
         # Encontrar el índice donde el ingreso marginal cruza el eje X
         zero_crossing_indices = np.where(np.diff(np.sign(it_difference)))[0]
-        zero_crossing_price = prices_extended[zero_crossing_index]
-        plt.plot(prices_extended[:-1], it_difference, label=f'α = {alpha}, p0 = {zero_crossing_price}')  # Añadir p0 en la leyenda
+        
+        # Comprobar si existen cruces de cero
         if len(zero_crossing_indices) > 0:
             zero_crossing_index = zero_crossing_indices[0]  # Toma el primer cruce
             zero_crossing_price = prices_extended[zero_crossing_index]  # Precio correspondiente
-    
+        
             # Dibujar línea roja en el cruce con el eje X
             plt.axvline(x=zero_crossing_price, linestyle='--', color='red')
-    
+        
             # Valor del ingreso total en ese punto
             revenue_at_zero_crossing = total_revenue(zero_crossing_price, alpha)
-    
+        
             plt.text(zero_crossing_price, 0, f'Max IM\nim={zero_crossing_price:.1f}', 
                      horizontalalignment='left', fontsize=8, color='red')
-    
+        
+            # Añadir el valor de cruce en la leyenda
+            plt.plot(prices_extended[:-1], it_difference, label=f'α = {alpha}, p0 = {zero_crossing_price:.1f}')  
+        else:
+            plt.plot(prices_extended[:-1], it_difference, label=f'α = {alpha}, p0 = N/A')  # Si no hay cruce
+        
     plt.title('Ingreso Marginal IT(p) - IT(p+1) (solo positivos)', fontsize=14)
     plt.xlabel('Precio (p)', fontsize=12)
     plt.ylabel('Ingreso Marginal IM(p)', fontsize=12)
     plt.axvline(x=p0, color='gray', linestyle='--', label=f'p0 = {p0}')
     plt.axvline(x=pmin, color='gray', linestyle='-', label=f'pmin = {pmin}')
-
+    
     plt.legend()
     plt.grid(True)
+
 
     plt.tight_layout()
     st.pyplot(plt)
