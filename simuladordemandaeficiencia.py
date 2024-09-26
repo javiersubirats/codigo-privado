@@ -68,9 +68,10 @@ if st.button("Generar Gráficos"):
         it = total_revenue(prices_extended, alpha)
         max_it_index = np.argmax(it)
         max_it_price = prices_extended[max_it_index]
-        plt.plot(prices_extended, it, label=f'α = {alpha}, IT = {max_it_price}')  # Añadir p0 en la leyenda
+        max_it_value = it[max_it_index]  # Valor máximo de IT
+        plt.plot(prices_extended, it, label=f'α = {alpha}, Max IT = {max_it_value:.2f}')  # Mostrar el valor máximo de IT en la leyenda
         plt.axvline(x=max_it_price, linestyle='--', color='red')
-        plt.text(max_it_price, it[max_it_index], f'Max IT\n={it[max_it_index]:.1f}', 
+        plt.text(max_it_price, max_it_value, f'Max IT\n={max_it_value:.1f}', 
                  horizontalalignment='left', fontsize=8, color='red')
     
     plt.title('Ingreso Total (IT)', fontsize=14)
@@ -78,8 +79,7 @@ if st.button("Generar Gráficos"):
     plt.ylabel('Ingreso Total IT(p)', fontsize=12)
     plt.axvline(x=p0, color='gray', linestyle='--', label=f'p0 = {p0}')
     plt.axvline(x=pmin, color='gray', linestyle='-', label=f'pmin = {pmin}')
-
-
+    
     plt.legend()
     plt.grid(True)
     
