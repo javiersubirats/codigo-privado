@@ -47,7 +47,7 @@ if st.button("Generar Gráficos"):
         max_it_index = np.argmax(it)
         max_it_price = prices_extended[max_it_index]
         opt_demand = demands[max_it_index]
-        plt.plot(prices_extended, demands, label=f'α = {alpha}, Max D = {opt_demand:.2f}')  # Mostrar demanda máxima en la leyenda
+        plt.plot(prices_extended, demands, label=f'α = {alpha}, Max D = {opt_demand:.1f}')  # Mostrar demanda máxima en la leyenda
         
 
         
