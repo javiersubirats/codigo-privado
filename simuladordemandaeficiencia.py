@@ -66,10 +66,9 @@ if st.button("Generar Gráficos"):
     for alpha in alpha_values:
         it_p0 = total_revenue(p0, alpha)
         it = total_revenue(prices_extended, alpha)
-        plt.plot(prices_extended, it, label=f'α = {alpha}, IT = {it}')  # Añadir p0 en la leyenda
-    
         max_it_index = np.argmax(it)
         max_it_price = prices_extended[max_it_index]
+        plt.plot(prices_extended, it, label=f'α = {alpha}, IT = {max_it_price}')  # Añadir p0 en la leyenda
         plt.axvline(x=max_it_price, linestyle='--', color='red')
         plt.text(max_it_price, it[max_it_index], f'Max IT\n={it[max_it_index]:.1f}', 
                  horizontalalignment='left', fontsize=8, color='red')
