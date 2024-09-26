@@ -115,9 +115,9 @@ if st.button("Generar Gráficos"):
                      horizontalalignment='left', fontsize=8, color='red')
         
             # Añadir el valor de cruce en la leyenda
-            plt.plot(prices_extended[:-1], it_difference, label=f'α = {alpha}, p0 = {zero_crossing_price:.1f}')  
+            plt.plot(prices_extended[:-1], it_difference, label=f'α = {alpha}, popt = {zero_crossing_price:.1f}')  
         else:
-            plt.plot(prices_extended[:-1], it_difference, label=f'α = {alpha}, p0 = N/A')  # Si no hay cruce
+            plt.plot(prices_extended[:-1], it_difference, label=f'α = {alpha}, popt = N/A')  # Si no hay cruce
         
     plt.title('Ingreso Marginal IT(p) - IT(p+1) (solo positivos)', fontsize=14)
     plt.xlabel('Precio (p)', fontsize=12)
