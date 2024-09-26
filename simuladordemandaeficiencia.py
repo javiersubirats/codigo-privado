@@ -42,13 +42,14 @@ if st.button("Generar Gráficos"):
         max_demand_index = np.argmax(demands)
         max_demand_value = demands[max_demand_index]  # Valor máximo de la demanda
         max_demand_price = prices_extended[max_demand_index]  # Precio correspondiente al valor máximo de demanda
-        
-        plt.plot(prices_extended, demands, label=f'α = {alpha}, Max D = {max_demand_value:.2f}')  # Mostrar demanda máxima en la leyenda
-        
-        # Ingreso total
+         # Ingreso total
         it = total_revenue(prices_extended, alpha)
         max_it_index = np.argmax(it)
         max_it_price = prices_extended[max_it_index]
+        opt_demand = demands[max_it_index]
+        plt.plot(prices_extended, demands, label=f'α = {alpha}, Max D = {opt_demand:.2f}')  # Mostrar demanda máxima en la leyenda
+        
+
         
         # Dibujar línea vertical en el precio donde IT es máximo
         plt.axvline(x=max_it_price, linestyle='--', color='red')
