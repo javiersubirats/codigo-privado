@@ -38,15 +38,18 @@ if st.button("Generar Gráficos"):
     # 1. Gráfico de demanda
     plt.subplot(3, 1, 1)
     for alpha in alpha_values:
-        d_p0 = demand(p0, alpha)
         demands = demand(prices_extended, alpha)
-        plt.plot(prices_extended, demands, label=f'α = {alpha}, D = {d_p0}')  # Añadir p0 en la leyenda
+        max_demand_index = np.argmax(demands)
+        max_demand_value = demands[max_demand_index]  # Valor máximo de la demanda
+        max_demand_price = prices_extended[max_demand_index]  # Precio correspondiente al valor máximo de demanda
+        
+        plt.plot(prices_extended, demands, label=f'α = {alpha}, Max D = {max_demand_value:.2f}')  # Mostrar demanda máxima en la leyenda
         
         # Ingreso total
         it = total_revenue(prices_extended, alpha)
         max_it_index = np.argmax(it)
         max_it_price = prices_extended[max_it_index]
-    
+        
         # Dibujar línea vertical en el precio donde IT es máximo
         plt.axvline(x=max_it_price, linestyle='--', color='red')
         plt.text(max_it_price, demands[max_it_index], f'D(p)\n{demands[max_it_index]:.1f}', 
@@ -57,9 +60,10 @@ if st.button("Generar Gráficos"):
     plt.ylabel('Demanda D(p)', fontsize=12)
     plt.axvline(x=p0, color='gray', linestyle='--', label=f'p0 = {p0}')
     plt.axvline(x=pmin, color='gray', linestyle='-', label=f'pmin = {pmin}')
-
+    
     plt.legend()
     plt.grid(True)
+
     
     # 2. Gráfico de ingreso total
     plt.subplot(3, 1, 2)
