@@ -56,6 +56,8 @@ if st.button("Generar Gráficos"):
     plt.xlabel('Precio (p)', fontsize=12)
     plt.ylabel('Demanda D(p)', fontsize=12)
     plt.axvline(x=p0, color='gray', linestyle='--', label=f'Precio p0 = {p0}')
+    plt.axvline(x=p0, color='gray', linestyle='--', label=f'Precio pmin = {pmin}')
+
     plt.legend()
     plt.grid(True)
     
@@ -76,6 +78,8 @@ if st.button("Generar Gráficos"):
     plt.xlabel('Precio (p)', fontsize=12)
     plt.ylabel('Ingreso Total IT(p)', fontsize=12)
     plt.axvline(x=p0, color='gray', linestyle='--', label=f'Precio p0 = {p0}')
+    plt.axvline(x=p0, color='gray', linestyle='--', label=f'Precio pmin = {pmin}')
+
 
     plt.legend()
     plt.grid(True)
@@ -111,6 +115,8 @@ if st.button("Generar Gráficos"):
     plt.xlabel('Precio (p)', fontsize=12)
     plt.ylabel('Ingreso Marginal IM(p)', fontsize=12)
     plt.axvline(x=p0, color='gray', linestyle='--', label=f'Precio p0 = {p0}')
+    plt.axvline(x=p0, color='gray', linestyle='--', label=f'Precio pmin = {pmin}')
+
     plt.legend()
     plt.grid(True)
 
