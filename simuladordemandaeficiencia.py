@@ -9,7 +9,8 @@ st.markdown('<p style="color:#71c5e8;"><strong>DGI-UX by Best Practices</strong>
 
 # Entradas del usuario
 lambda_value = st.number_input("Demanda máxima (λ)", min_value=0.1, value=18.0, step=0.1)  # Acepta decimales
-p0 = st.number_input("Precio de referencia (p0)", min_value=1, value=100)
+pmin = st.number_input("Precio minimo a la venta (pmin)", min_value=1, value=100)
+p0 = pmin*0.8
 max_price = st.number_input("Tarifa máxima", min_value=1, value=1600)
 
 # Entrada de valores de alpha como una lista de decimales
@@ -25,7 +26,7 @@ def total_revenue(p, alpha):
     return p * demand(p, alpha)
 
 # Rango de precios entre p0 y la tarifa máxima
-prices_extended = np.linspace(p0*0.8, max_price, 500)
+prices_extended = np.linspace(p0, max_price, 500)
 
 # Inicializa la lista de resultados
 resultados = []
