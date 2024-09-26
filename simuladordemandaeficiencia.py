@@ -66,7 +66,7 @@ if st.button("Generar Gráficos"):
     for alpha in alpha_values:
         it_p0 = total_revenue(p0, alpha)
         it = total_revenue(prices_extended, alpha)
-        plt.plot(prices_extended, it, label=f'α = {alpha}, IT = {it_p0}')  # Añadir p0 en la leyenda
+        plt.plot(prices_extended, it, label=f'α = {alpha}, IT = {it}')  # Añadir p0 en la leyenda
     
         max_it_index = np.argmax(it)
         max_it_price = prices_extended[max_it_index]
