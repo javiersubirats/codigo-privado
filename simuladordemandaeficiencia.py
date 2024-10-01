@@ -157,7 +157,7 @@ if st.button("Generar Gráficos"):
             'Precio': prices_extended,
             'Demanda': demands,
             'Ingreso Total': it,
-            'Transformed Price': transformed_prices
+            'Transformed Price': [f"{tp:.1f}" for tp in transformed_prices]  # Formatear a 1 decimal})
         })
         
         st.write(f"Resultados para α = {alpha}")
