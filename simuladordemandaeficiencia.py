@@ -16,8 +16,8 @@ alpha_values_input = st.text_input("Valores de α (separados por comas)", "30, 1
 alpha_values = [float(alpha.strip()) for alpha in alpha_values_input.split(',')]
 
 # Entradas adicionales
-pmin = st.number_input("Precio mínimo a la venta (pmin), DF cls Z", min_value=1, value=100)
-p0 = pmin * 0.8  # Precio inicial basado en el 80% de pmin
+pmin = st.number_input("Precio mínimo (p0)", min_value=1, value=100)
+p0 = pmin  # Precio inicial basado en el 80% de pmin
 max_price = st.number_input("Tarifa máxima (pmax), DF cls Y", min_value=1, value=1600)
 
 # Función de demanda
@@ -54,7 +54,7 @@ if st.button("Generar Gráficos"):
     plt.xlabel('Precio (p)', fontsize=12)
     plt.ylabel('Demanda D(p)', fontsize=12)
     plt.axvline(x=p0, color='gray', linestyle='--', label=f'p0 = {p0}')
-    plt.axvline(x=pmin, color='gray', linestyle='-', label=f'pmin = {pmin}')
+    #plt.axvline(x=pmin, color='gray', linestyle='-', label=f'pmin = {pmin}')
     plt.legend()
     plt.grid(True)
 
@@ -75,7 +75,7 @@ if st.button("Generar Gráficos"):
     plt.xlabel('Precio (p)', fontsize=12)
     plt.ylabel('Ingreso Total IT(p)', fontsize=12)
     plt.axvline(x=p0, color='gray', linestyle='--', label=f'p0 = {p0}')
-    plt.axvline(x=pmin, color='gray', linestyle='-', label=f'pmin = {pmin}')
+    #plt.axvline(x=pmin, color='gray', linestyle='-', label=f'pmin = {pmin}')
     plt.legend()
     plt.grid(True)
 
@@ -101,7 +101,7 @@ if st.button("Generar Gráficos"):
     plt.xlabel('Precio (p)', fontsize=12)
     plt.ylabel('Ingreso Marginal IM(p)', fontsize=12)
     plt.axvline(x=p0, color='gray', linestyle='--', label=f'p0 = {p0}')
-    plt.axvline(x=pmin, color='gray', linestyle='-', label=f'pmin = {pmin}')
+    #plt.axvline(x=pmin, color='gray', linestyle='-', label=f'pmin = {pmin}')
     plt.legend()
     plt.grid(True)
 
