@@ -8,7 +8,7 @@ st.markdown('<h1 style="color:#0072ce;">Modelo de Demanda e Ingreso Total</h1>',
 st.markdown('<p style="color:#71c5e8;"><strong>DGI-UX by Best Practices</strong></p>', unsafe_allow_html=True)
 
 # Entrada para valores de lambda (separados por comas), que se convierten en una lista de floats
-lambda_values_input = st.text_input("Valores de demanda máxima λ (separados por comas)", "18.0, 20.0")
+lambda_values_input = st.text_input("Valores de demanda máxima λ (separados por comas)", "18, 20")
 lambda_values = [float(lambda_value.strip()) for lambda_value in lambda_values_input.split(',')]
 
 # Entrada para valores de α (separados por comas)
