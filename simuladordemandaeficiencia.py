@@ -161,6 +161,8 @@ if st.button("Generar Gráficos"):
         }) 
         # Aplicar formato a 'Transformed Price' para que tenga solo un decimal
         df['Precio'] = df['Precio'].map('{:.1f}'.format)
+        df['Demanda'] = df['Demanda'].map('{:.1f}'.format)
+        df['Ingreso Total'] = df['Ingreso Total'].map('{:.1f}'.format)
         df['Transformed Price'] = df['Transformed Price'].map('{:.1f}'.format)
         
         st.write(f"Resultados para α = {alpha}")
