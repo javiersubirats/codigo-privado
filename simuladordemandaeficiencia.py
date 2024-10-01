@@ -158,7 +158,7 @@ if st.button("Generar Gráficos"):
             'Demanda': demands,
             'Ingreso Total': it,
             'Transformed Price': transformed_prices
-            
+        }) 
         # Aplicar formato a 'Transformed Price' para que tenga solo un decimal
         df['Precio'] = df['Precio'].map('{:.1f}'.format)
         df['Transformed Price'] = df['Transformed Price'].map('{:.1f}'.format)
