@@ -123,7 +123,7 @@ if st.button("Generar Gráficos"):
     for alpha in alpha_values:
         # Cálculos de demanda e ingreso total
         demands = demand(prices_extended, alpha, lambda_value)
-        it = total_revenue(prices_extended, alpha)
+        it = total_revenue(prices_extended, alpha, lambda_value))
         
         # Cálculo del "Transformed Price"
         transformed_prices = transformed_price(it, demands)
