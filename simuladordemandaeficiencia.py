@@ -157,8 +157,11 @@ if st.button("Generar Gráficos"):
             'Precio': prices_extended,
             'Demanda': demands,
             'Ingreso Total': it,
-            'Transformed Price': [f"{tp:.1f}" for tp in transformed_prices]  # Formatear a 1 decimal})
-        })
+            'Transformed Price': transformed_prices
+            
+        # Aplicar formato a 'Transformed Price' para que tenga solo un decimal
+        df['Precio'] = df['Precio'].map('{:.1f}'.format)
+        df['Transformed Price'] = df['Transformed Price'].map('{:.1f}'.format)
         
         st.write(f"Resultados para α = {alpha}")
         st.dataframe(df)
