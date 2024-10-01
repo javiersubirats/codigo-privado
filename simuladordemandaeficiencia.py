@@ -11,14 +11,14 @@ st.markdown('<p style="color:#71c5e8;"><strong>DGI-UX by Best Practices</strong>
 lambda_values_input = st.text_input("Valores de demanda máxima λ (separados por comas)", "18.0, 20.0")
 lambda_values = [float(lambda_value.strip()) for lambda_value in lambda_values_input.split(',')]
 
+# Entrada para valores de α (separados por comas)
+alpha_values_input = st.text_input("Valores de α (separados por comas)", "30, 130, 230")
+alpha_values = [float(alpha.strip()) for alpha in alpha_values_input.split(',')]
+
 # Entradas adicionales
 pmin = st.number_input("Precio mínimo a la venta (pmin)", min_value=1, value=100)
 p0 = pmin * 0.8  # Precio inicial basado en el 80% de pmin
 max_price = st.number_input("Tarifa máxima", min_value=1, value=1600)
-
-# Entrada para valores de α (separados por comas)
-alpha_values_input = st.text_input("Valores de α (separados por comas)", "30, 130, 230")
-alpha_values = [float(alpha.strip()) for alpha in alpha_values_input.split(',')]
 
 # Función de demanda
 def demand(p, alpha, lambda_value):
