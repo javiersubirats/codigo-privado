@@ -109,36 +109,36 @@ if st.button("Generar Gráficos"):
     st.pyplot(plt)
 
    # Cálculo del ingreso incremental y la demanda incremental
-def transformed_price(it, demands):
-    # Calcula la diferencia entre ingresos totales (IT(p_i) - IT(p_{i+1}))
-    delta_it = it[:-1] - it[1:]
-    # Calcula la diferencia entre demandas (D(p_i) - D(p_{i+1}))
-    delta_demand = demands[:-1] - demands[1:]
-    # Evita divisiones por cero en la demanda incremental
-    with np.errstate(divide='ignore', invalid='ignore'):
-        transformed_prices = np.where(delta_demand != 0, delta_it / delta_demand, np.nan)
-    return transformed_prices
-
-# Mostrar tablas en Streamlit con formato europeo, incluyendo el "Transformed Price"
-for alpha in alpha_values:
-    # Cálculos de demanda e ingreso total
-    demands = demand(prices_extended, alpha)
-    it = total_revenue(prices_extended, alpha)
+    def transformed_price(it, demands):
+        # Calcula la diferencia entre ingresos totales (IT(p_i) - IT(p_{i+1}))
+        delta_it = it[:-1] - it[1:]
+        # Calcula la diferencia entre demandas (D(p_i) - D(p_{i+1}))
+        delta_demand = demands[:-1] - demands[1:]
+        # Evita divisiones por cero en la demanda incremental
+        with np.errstate(divide='ignore', invalid='ignore'):
+            transformed_prices = np.where(delta_demand != 0, delta_it / delta_demand, np.nan)
+        return transformed_prices
     
-    # Cálculo del "Transformed Price"
-    transformed_prices = transformed_price(it, demands)
-    
-    # Crea un DataFrame con el precio, la demanda, el ingreso total y el transformed price
-    df = pd.DataFrame({
-        'Precio': prices_extended[:-1],  # Usamos hasta el penúltimo valor debido a los cálculos incrementales
-        'Demanda': demands[:-1],  # También hasta el penúltimo valor
-        'Ingreso Total': it[:-1],  # Hasta el penúltimo valor
-        'Transformed Price': transformed_prices  # Añadimos el transformed price
-    })
-    
-    # Aplicar formato europeo a los valores numéricos (separador de miles con '.' y decimales con ',')
-    df = df.applymap(lambda x: f"{x:,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.') if isinstance(x, (int, float)) else x)
-    
-    # Muestra la tabla en Streamlit para cada α
-    st.write(f"Resultados para α = {alpha}")
-    st.dataframe(df)  # Muestra el DataFrame en Streamlit con los resultados
+    # Mostrar tablas en Streamlit con formato europeo, incluyendo el "Transformed Price"
+    for alpha in alpha_values:
+        # Cálculos de demanda e ingreso total
+        demands = demand(prices_extended, alpha)
+        it = total_revenue(prices_extended, alpha)
+        
+        # Cálculo del "Transformed Price"
+        transformed_prices = transformed_price(it, demands)
+        
+        # Crea un DataFrame con el precio, la demanda, el ingreso total y el transformed price
+        df = pd.DataFrame({
+            'Precio': prices_extended[:-1],  # Usamos hasta el penúltimo valor debido a los cálculos incrementales
+            'Demanda': demands[:-1],  # También hasta el penúltimo valor
+            'Ingreso Total': it[:-1],  # Hasta el penúltimo valor
+            'Transformed Price': transformed_prices  # Añadimos el transformed price
+        })
+        
+        # Aplicar formato europeo a los valores numéricos (separador de miles con '.' y decimales con ',')
+        df = df.applymap(lambda x: f"{x:,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.') if isinstance(x, (int, float)) else x)
+        
+        # Muestra la tabla en Streamlit para cada α
+        st.write(f"Resultados para α = {alpha}")
+        st.dataframe(df)  # Muestra el DataFrame en Streamlit con los resultados
