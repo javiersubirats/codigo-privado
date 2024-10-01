@@ -122,7 +122,7 @@ if st.button("Generar Gráficos"):
     # Mostrar tablas en Streamlit con formato europeo, incluyendo el "Transformed Price"
     for alpha in alpha_values:
         # Cálculos de demanda e ingreso total
-        demands = demand(prices_extended, alpha)
+        demands = demand(prices_extended, alpha, lambda_value)
         it = total_revenue(prices_extended, alpha)
         
         # Cálculo del "Transformed Price"
