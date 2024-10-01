@@ -142,13 +142,24 @@ if st.button("Generar Gráficos"):
         # Cálculo del "Transformed Price"
         transformed_prices = transformed_price(it, demands)
     
+        # Asegurarte de que todas las listas tengan la misma longitud
+        # Para eso, recortamos las listas al mismo tamaño, tomando la longitud mínima entre ellas
+        min_length = min(len(prices_extended), len(demands), len(it), len(transformed_prices))
+        
+        # Recortar las listas a la longitud mínima
+        prices_extended = prices_extended[:min_length]
+        demands = demands[:min_length]
+        it = it[:min_length]
+        transformed_prices = transformed_prices[:min_length]
+        
         # Crear el DataFrame con los resultados
         df = pd.DataFrame({
-            'Precio': prices_extended[:-1],
-            'Demanda': demands[:-1],
-            'Ingreso Total': it[:-1],
+            'Precio': prices_extended,
+            'Demanda': demands,
+            'Ingreso Total': it,
             'Transformed Price': transformed_prices
         })
-    
+        
         st.write(f"Resultados para α = {alpha}")
         st.dataframe(df)
+
