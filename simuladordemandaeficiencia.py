@@ -18,7 +18,7 @@ alpha_values = [float(alpha.strip()) for alpha in alpha_values_input.split(',')]
 # Entradas adicionales
 pmin = st.number_input("Precio mínimo (p0)", min_value=1, value=100)
 p0 = pmin  # Precio inicial basado en el 80% de pmin
-max_price = st.number_input("Tarifa máxima (pmax), DF cls Y", min_value=1, value=1600)
+max_price = st.number_input("Tarifa máxima (pmax)", min_value=1, value=1600)
 
 # Función de demanda
 def demand(p, alpha, lambda_value):
